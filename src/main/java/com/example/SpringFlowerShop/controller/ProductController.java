@@ -1,11 +1,51 @@
 package com.example.SpringFlowerShop.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.SpringFlowerShop.dto.ProductDto;
+import com.example.SpringFlowerShop.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
 public class ProductController {
 
+    private final ProductService productService;
 
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
+        ProductDto newProductDto = productService.createProduct(productDto);
+        return ResponseEntity.ok(newProductDto);
+    }
+
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductDto>> getAllProducts(){
+        return ResponseEntity.ok(productService.getAllProducts());
+    }
+
+    @GetMapping("/products/{id}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
+        ProductDto productDto = productService.getProductById(id);
+        return ResponseEntity.ok(productDto);
+    }
+    @PutMapping("/products/{id}")
+    private ResponseEntity<ProductDto> updateProduct(@PathVariable Long id,
+                                                     @RequestBody ProductDto productDto){
+        ProductDto updatedProduct = productService.updateProduct(id, productDto);
+        return ResponseEntity.ok(updatedProduct);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted successfully");
+    }
 }

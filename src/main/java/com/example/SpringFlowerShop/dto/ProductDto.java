@@ -1,24 +1,17 @@
-package com.example.SpringFlowerShop.entity;
+package com.example.SpringFlowerShop.dto;
 
-import jakarta.persistence.*;
+import java.math.BigDecimal;
 
-@Entity
-@Table(name = "product")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private double price;
-    @Column(nullable = false)
-    private int height;
+public class ProductDto {
+    Long id;
+    String name;
+    double price;
+    int height;
 
-    public Product() {
+    public ProductDto() {
     }
 
-    public Product(Long id, String name, double price, int height) {
+    public ProductDto(Long id, String name, double price, int height) {
         this.id = id;
         this.name = name;
         this.price = price;
