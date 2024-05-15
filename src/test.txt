@@ -1,0 +1,76 @@
+1. Создание цветка:
+    Путь: POST /api/v1/product
+    RequestBody:
+    {
+        "name": "tulip",
+        "price": 3.99 ,
+        "height": 30
+    }
+    Response:
+    {
+        "id": 4,
+        "name": "tulip",
+        "price": 3.99,
+        "height": 30
+    }
+
+2. Получение информации о цветке:
+    Путь: GET /product/4
+    Response:
+    {
+        "id": 4,
+        "name": "tulip",
+        "price": 3.99,
+        "height": 30
+    }
+
+3. Получение информации о всех цветах:
+    Путь: GET /api/v1/products
+    Response:
+    [
+       {
+           "id": 1,
+           "name": "pion",
+           "price": 0.0,
+           "height": 30
+       },
+       {
+           "id": 2,
+           "name": "cornflower",
+           "price": 0.0,
+           "height": 10
+       },
+       {
+           "id": 3,
+           "name": "sunflower",
+           "price": 5.99,
+           "height": 80
+       },
+       {
+           "id": 4,
+           "name": "tulip",
+           "price": 3.99,
+           "height": 30
+       }
+    ]
+
+4. Изменение данных о цветке:
+    Путь: PUT /api/v1/product/3
+    RequestBody:
+    {
+       "name": "sunflower",
+       "price": 8.50 ,
+       "height": 90
+    }
+    Response:
+    {
+       "id": 3,
+       "name": "sunflower",
+       "price": 8.5,
+       "height": 90
+    }
+
+5. Удаление цветка:
+    Путь: Delete /api/v1//products/2
+    Responce:
+    Product deleted successfully
