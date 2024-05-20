@@ -8,16 +8,6 @@ public class ProductDto {
     double price;
     int height;
 
-    public ProductDto() {
-    }
-
-    public ProductDto(Long id, String name, double price, int height) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.height = height;
-    }
-
     public Long getId() {
         return id;
     }

@@ -36,7 +36,7 @@ public class ProductService {
                 .orElse(new Product()));
     }
 
-    public ProductDto updateProduct(Long id, ProductDto updatedProduct){
+    public ProductDto updateProductById(Long id, ProductDto updatedProduct){
         ProductDto productDto = productMapper.mapToProductDto(
                 productRepository.findById(id).orElse(new Product()));
         productDto.setName(updatedProduct.getName());
@@ -46,7 +46,7 @@ public class ProductService {
                 productRepository.save(productMapper.mapToProductEntity(productDto)));
     }
 
-    public void deleteProduct(Long id){
+    public void deleteProductById(Long id){
         productRepository.deleteById(id);
     }
 }

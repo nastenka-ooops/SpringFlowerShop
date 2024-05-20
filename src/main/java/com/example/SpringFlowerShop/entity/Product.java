@@ -14,7 +14,9 @@ public class Product {
     private double price;
     @Column(nullable = false)
     private int height;
-
+    @OneToOne(optional=false,cascade=CascadeType.ALL,
+            mappedBy="product",targetEntity=Inventory.class)
+    private Inventory inventory;
     public Product() {
     }
 
@@ -56,4 +58,13 @@ public class Product {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
 }
