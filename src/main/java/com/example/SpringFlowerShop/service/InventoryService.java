@@ -17,12 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class InventoryService {
-    @Autowired
     private ProductRepository productRepository;
-    @Autowired
     private final InventoryRepository inventoryRepository;
     private final InventoryMapper inventoryMapper = new InventoryMapper();
     private final InventoryWithProductInfoMapper inventoryWithProductInfoMapper = new InventoryWithProductInfoMapper();
+    @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }

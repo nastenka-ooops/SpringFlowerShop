@@ -12,14 +12,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class InventoryController {
-    @Autowired
     private final InventoryService inventoryService;
-
+    @Autowired
     public InventoryController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
-    @PostMapping("/inventory")
+    @PostMapping("/inventories")
     public ResponseEntity<InventoryDto> createInventory(@RequestBody InventoryDto inventoryDto){
         return ResponseEntity.ok(inventoryService.createInventory(inventoryDto));
     }
@@ -36,7 +35,7 @@ public class InventoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("inventories/{productId}/productInfo")
+    @GetMapping("/inventories/{productId}/productInfo")
     public ResponseEntity<InventoryWithProductInfoDto> getInventoryWithProductInfoByProductId
             (@PathVariable Long productId){
         return ResponseEntity.ok(inventoryService.getInventoryByProductIdWithProductInfo(productId));
