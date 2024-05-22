@@ -41,7 +41,7 @@ public class CustomerController {
         return ResponseEntity.ok(orders);
     }
 
-    @PostMapping("/customers/{id}")
+    @PostMapping("/customers")
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
         return ResponseEntity.ok(customerService.createCustomer(customerDto));
     }

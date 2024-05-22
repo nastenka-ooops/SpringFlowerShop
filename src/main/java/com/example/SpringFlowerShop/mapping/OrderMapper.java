@@ -17,9 +17,9 @@ public class OrderMapper {
     public Order mapToOrderEntity (OrderDto dto) {
         Order order = new Order();
         order.setId(dto.getId());
-        order.setDate(order.getDate());
-        order.setCustomerId(order.getCustomerId());
-        order.setStatus(order.getStatus());
+        order.setDate(dto.getDate());
+        order.setCustomerId(dto.getCustomerId());
+        order.setStatus(dto.getStatus());
         return order;
     }
 }

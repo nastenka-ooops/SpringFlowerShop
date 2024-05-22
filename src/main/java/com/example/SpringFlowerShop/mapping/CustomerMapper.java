@@ -19,11 +19,11 @@ public class CustomerMapper {
     public Customer mapToCustomerEntity (CustomerDto dto) {
         Customer customer = new Customer();
         customer.setId(dto.getId());
-        customer.setFirstName(customer.getFirstName());
-        customer.setLastName(customer.getLastName());
-        customer.setAddress(customer.getAddress());
-        customer.setPhone(customer.getPhone());
-        customer.setEmail(customer.getEmail());
+        customer.setFirstName(dto.getFirstName());
+        customer.setLastName(dto.getLastName());
+        customer.setAddress(dto.getAddress());
+        customer.setPhone(dto.getPhone());
+        customer.setEmail(dto.getEmail());
         return customer;
     }
 }

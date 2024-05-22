@@ -14,7 +14,7 @@ public class Inventory {
     private int quantity;
     @Column(name = "shipment_date", nullable = false)
     private Date shipmentDate;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @MapsId
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;

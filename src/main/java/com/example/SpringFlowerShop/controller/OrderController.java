@@ -1,9 +1,6 @@
 package com.example.SpringFlowerShop.controller;
 
-import com.example.SpringFlowerShop.dto.CustomerDto;
-import com.example.SpringFlowerShop.dto.InventoryWithProductInfoDto;
-import com.example.SpringFlowerShop.dto.OrderDto;
-import com.example.SpringFlowerShop.dto.OrderWithCustomerInfoDto;
+import com.example.SpringFlowerShop.dto.*;
 import com.example.SpringFlowerShop.service.CustomerService;
 import com.example.SpringFlowerShop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +36,17 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getOrderByIdWithCustomerInfo(id));
     }
 
-    @PostMapping("/orders/{id}")
+    @GetMapping("/orders/{id}/items")
+    public ResponseEntity<List<OrderItemDto>> getOrderItemsByOrderId(@PathVariable Long id) {
+        List<OrderItemDto> orderItemDtos = orderService.getOrderItemsByOrderId(id);
+        if (orderItemDtos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(orderItemDtos);
+        }
+    }
+
+    @PostMapping("/orders")
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) {
         return ResponseEntity.ok(orderService.createOrder(orderDto));
     }

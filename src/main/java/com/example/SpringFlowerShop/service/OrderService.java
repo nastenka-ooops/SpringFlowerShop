@@ -1,15 +1,11 @@
 package com.example.SpringFlowerShop.service;
 
-import com.example.SpringFlowerShop.dto.CustomerDto;
-import com.example.SpringFlowerShop.dto.InventoryWithProductInfoDto;
-import com.example.SpringFlowerShop.dto.OrderDto;
-import com.example.SpringFlowerShop.dto.OrderWithCustomerInfoDto;
-import com.example.SpringFlowerShop.entity.Customer;
-import com.example.SpringFlowerShop.entity.Inventory;
-import com.example.SpringFlowerShop.entity.Order;
-import com.example.SpringFlowerShop.entity.Product;
+import com.example.SpringFlowerShop.dto.*;
+import com.example.SpringFlowerShop.entity.*;
+import com.example.SpringFlowerShop.mapping.OrderItemMapper;
 import com.example.SpringFlowerShop.mapping.OrderMapper;
 import com.example.SpringFlowerShop.mapping.OrderWithCustomerInfoMapper;
+import com.example.SpringFlowerShop.repository.OrderItemRepository;
 import com.example.SpringFlowerShop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +17,14 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
     private final OrderMapper orderMapper = new OrderMapper();
+    private final OrderItemMapper orderItemMapper= new OrderItemMapper();
     private final OrderWithCustomerInfoMapper orderWithCustomerInfoMapper = new OrderWithCustomerInfoMapper();
     @Autowired
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
         this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
     public List<OrderDto> getAllOrders() {
@@ -43,6 +42,13 @@ public class OrderService {
         Customer customer = order.getCustomer();
         return orderWithCustomerInfoMapper
                 .mapToInventoryWithProductInfoDto(order,customer);
+    }
+
+    public List<OrderItemDto> getOrderItemsByOrderId(Long orderId) {
+        List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
+        return orderItems.stream()
+                .map(orderItemMapper::mapToOrderItemDto)
+                .collect(Collectors.toList());
     }
 
     public OrderDto createOrder(OrderDto orderDto) {

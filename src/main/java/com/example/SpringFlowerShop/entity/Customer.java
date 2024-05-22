@@ -20,8 +20,8 @@ public class Customer {
     private String phone;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany(mappedBy = "customer", targetEntity = Order.class,
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", targetEntity = Order.class, cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private Collection<Order> orders;
 
     public Long getId() {

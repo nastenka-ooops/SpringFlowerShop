@@ -3,6 +3,7 @@ package com.example.SpringFlowerShop.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "`order`")
@@ -12,14 +13,25 @@ public class Order {
     private Long id;
     @Column(nullable = false)
     private Date date;
-    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "customer_id", nullable = false)
     private int customerId;
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private Status status;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Customer customer;
+
+    @OneToMany(mappedBy = "orderId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<OrderItem> orderItems;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
     public Long getId() {
         return id;
