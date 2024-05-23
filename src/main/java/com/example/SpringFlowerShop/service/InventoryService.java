@@ -46,11 +46,13 @@ public class InventoryService {
     public InventoryDto createInventory (InventoryDto inventoryDto){
         Long productId = inventoryDto.getProductId();
 
-        if (!productRepository.existsById(productId)){
-            throw new IllegalArgumentException("Product with id " + productId + " does not exist");
-        }
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Product with id " + productId + " does not exist"));
+
 
         Inventory newInventory = inventoryMapper.mapToInventoryEntity(inventoryDto);
+        newInventory.setProduct(product);
+
         newInventory = inventoryRepository.save(newInventory);
         return inventoryMapper.mapToInventoryDto(newInventory);
     }

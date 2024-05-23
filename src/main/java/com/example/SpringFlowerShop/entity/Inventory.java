@@ -1,6 +1,7 @@
 package com.example.SpringFlowerShop.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Primary;
 
 
 import java.sql.Date;
@@ -8,24 +9,22 @@ import java.sql.Date;
 @Table(name = "inventory")
 public class Inventory {
     @Id
-    @Column(name = "product_id", nullable = false)
-    private Long productId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "quantity", nullable = false)
     private int quantity;
     @Column(name = "shipment_date", nullable = false)
     private Date shipmentDate;
     @OneToOne()
-    @MapsId
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getQuantity() {

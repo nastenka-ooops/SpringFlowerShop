@@ -22,7 +22,7 @@ public class Order {
     @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "orderId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItem> orderItems;
 
     public List<OrderItem> getOrderItems() {
