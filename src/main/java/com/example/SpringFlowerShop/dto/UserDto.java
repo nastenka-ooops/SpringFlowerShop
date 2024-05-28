@@ -1,19 +1,13 @@
-package com.example.SpringFlowerShop.entity;
+package com.example.SpringFlowerShop.dto;
 
-import jakarta.persistence.*;
+import com.example.SpringFlowerShop.entity.Role;
 
-@Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDto {
     private Long id;
-    @Column(nullable = false, unique = true)
     private String name;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+
+    private String confirmPassword;
     private Role role;
 
     public Long getId() {
@@ -48,4 +42,11 @@ public class User {
         this.role = role;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }
