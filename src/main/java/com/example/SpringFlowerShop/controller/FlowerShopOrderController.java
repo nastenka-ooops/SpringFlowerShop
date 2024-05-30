@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -32,9 +34,9 @@ public class FlowerShopOrderController {
     }
 
     @PostMapping("/order")
-    public String placeOrder(OrderDto orderDto, Model model) {
+    public String placeOrder(OrderDto orderDto, RedirectAttributes redirectAttributes) {
         orderService.createOrder(getCustomerName(), orderDto);
-        model.addAttribute("order", orderDto);
+        redirectAttributes.addFlashAttribute("order", orderDto);
         return "redirect:/order/success";
     }
 

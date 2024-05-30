@@ -20,12 +20,16 @@ public class Order {
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<OrderItem> orderItems;
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
+
+    public Order() {
+    }
+
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;

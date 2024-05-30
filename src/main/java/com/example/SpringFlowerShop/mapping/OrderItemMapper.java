@@ -13,12 +13,12 @@ public class OrderItemMapper {
         return dto;
     }
 
-    public static OrderItem mapToOrderItemEntity(OrderItemDto orderItemDto) {
+/*    public static OrderItem mapToOrderItemEntity(OrderItemDto orderItemDto) {
         OrderItem orderItem = new OrderItem();
         orderItem.setId(orderItemDto.getId());
         //orderItem.setOrder(orderItemDto.getOrder());
         //orderItem.setProductId(orderItemDto.getProductId());
         orderItem.setQuantity(orderItemDto.getQuantity());
         return orderItem;
-    }
+    }*/
 }

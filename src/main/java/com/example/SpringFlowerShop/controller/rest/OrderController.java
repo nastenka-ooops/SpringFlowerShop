@@ -21,7 +21,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<OrderDto> getAllOrders() {
         return orderService.getAllOrders();
     }
@@ -48,7 +48,7 @@ public class OrderController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) {
         return ResponseEntity.ok(orderService.createOrder(orderDto));
     }

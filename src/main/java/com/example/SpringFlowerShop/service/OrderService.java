@@ -115,8 +115,13 @@ public class OrderService {
         }
     }
 
-    //TODO add logic
     public OrderDto createOrder(OrderDto orderDto) {
-        return null;
+        Order order = new Order();
+        order.setCustomer(customerRepository.findById(orderDto.getCustomerId()).get());
+        order.setDate(orderDto.getDate());
+        order.setStatus(orderDto.getStatus());
+        order.setOrderItems(new ArrayList<>());
+        Order savedOrder = orderRepository.save(order);
+        return orderMapper.mapToOrderDto(savedOrder);
     }
 }

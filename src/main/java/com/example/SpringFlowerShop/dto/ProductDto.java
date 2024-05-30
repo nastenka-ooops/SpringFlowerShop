@@ -6,6 +6,15 @@ public class ProductDto {
     double price;
     int height;
 
+    public ProductDto() {
+    }
+
+    public ProductDto(String name, double price, int height) {
+        this.name = name;
+        this.price = price;
+        this.height = height;
+    }
+
     public Long getId() {
         return id;
     }

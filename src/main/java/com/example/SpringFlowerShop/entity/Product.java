@@ -16,7 +16,7 @@ public class Product {
     private double price;
     @Column(nullable = false)
     private int height;
-
+    @Transient
     private Boolean deleted;
 
     public Boolean isDeleted() {

@@ -4,6 +4,8 @@ import com.example.SpringFlowerShop.dto.OrderItemDto;
 import com.example.SpringFlowerShop.entity.OrderItem;
 import com.example.SpringFlowerShop.mapping.OrderItemMapper;
 import com.example.SpringFlowerShop.repository.OrderItemRepository;
+import com.example.SpringFlowerShop.repository.OrderRepository;
+import com.example.SpringFlowerShop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,15 @@ import java.util.stream.Collectors;
 @Service
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
     private final OrderItemMapper orderItemMapper = new OrderItemMapper();
 
     @Autowired
-    public OrderItemService(OrderItemRepository orderItemRepository) {
+    public OrderItemService(OrderItemRepository orderItemRepository, OrderRepository orderRepository, ProductRepository productRepository) {
         this.orderItemRepository = orderItemRepository;
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
     }
 
     public List<OrderItemDto> getAllOrderItems() {
@@ -49,7 +55,11 @@ public class OrderItemService {
 
     public OrderItemDto createOrderItem(OrderItemDto orderItemDto) {
 
-        OrderItem orderItem = orderItemMapper.mapToOrderItemEntity(orderItemDto);
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrder(orderRepository.findById(orderItemDto.getOrderId()).get());
+        orderItem.setProduct(productRepository.findById(orderItemDto.getProductId()).get());
+        orderItem.setQuantity(orderItem.getQuantity());
+
         OrderItem savedOrderItem = orderItemRepository.save(orderItem);
         return orderItemMapper.mapToOrderItemDto(savedOrderItem);
     }

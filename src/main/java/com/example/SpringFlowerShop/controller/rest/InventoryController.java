@@ -50,7 +50,7 @@ public class InventoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/inventories/{id}")
+    @DeleteMapping("/inventories/{productId}")
     public ResponseEntity<Void> deleteInventoryByProductId(@PathVariable Long productId) {
         if (inventoryService.deleteInventoryByProductId(productId))
             return ResponseEntity.noContent().build();
