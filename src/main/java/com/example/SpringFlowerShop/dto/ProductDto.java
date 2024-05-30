@@ -1,7 +1,5 @@
 package com.example.SpringFlowerShop.dto;
 
-import java.math.BigDecimal;
-
 public class ProductDto {
     Long id;
     String name;

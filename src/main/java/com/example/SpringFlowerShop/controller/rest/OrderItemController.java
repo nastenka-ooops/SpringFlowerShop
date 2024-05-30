@@ -1,4 +1,4 @@
-package com.example.SpringFlowerShop.controller;
+package com.example.SpringFlowerShop.controller.rest;
 
 import com.example.SpringFlowerShop.dto.OrderItemDto;
 import com.example.SpringFlowerShop.service.OrderItemService;
@@ -37,7 +37,7 @@ public class OrderItemController {
     @GetMapping("/orderItems/order/{orderId}/product/{productId}")
     public ResponseEntity<OrderItemDto> getOrderItemByOrderIdAndProductId(@PathVariable int orderId,
                                                                           @PathVariable int productId) {
-        Optional<OrderItemDto> orderItemDto = orderItemService.getOrderItemByOrderIdAndProductId(orderId,productId);
+        Optional<OrderItemDto> orderItemDto = orderItemService.getOrderItemByOrderIdAndProductId(orderId, productId);
         return orderItemDto.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -49,7 +49,7 @@ public class OrderItemController {
 
     @PutMapping("/orderItems/order/{orderId}/product/{productId}")
     public ResponseEntity<OrderItemDto> updateOrderItemByOrderIdAndProductId(@PathVariable int orderId, @PathVariable int productId,
-                                            @RequestBody OrderItemDto orderItemDto){
+                                                                             @RequestBody OrderItemDto orderItemDto) {
         return orderItemService.updateOrderItemByOrderIdAndProductId(orderId, productId, orderItemDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -57,7 +57,7 @@ public class OrderItemController {
 
     @DeleteMapping("/orderItems/order/{orderId}/product/{productId}")
     public ResponseEntity<Void> deleteOrderItemByOrderIdAndProductId(@PathVariable int orderId, @PathVariable int productId) {
-        if (orderItemService.deleteOrderItemByOrderIdAndProductId(orderId,productId))
+        if (orderItemService.deleteOrderItemByOrderIdAndProductId(orderId, productId))
             return ResponseEntity.noContent().build();
         else
             return ResponseEntity.notFound().build();

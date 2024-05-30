@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+</head>
+<body>
+<h1>Add Product</h1>
+<form th:action="@{/admin/products/add}" method="post">
+    <label>Name: </label>
+    <input type="text" name="name"><br>
+    <label>Price: </label>
+    <input type="text" name="price"><br>
+    <label>Height: </label>
+    <input type="text" name="height"><br>
+    <button type="submit">Add Product</button>
+</form>
+<a href="/admin/products">Back to Product List</a>
+</body>
+</html>

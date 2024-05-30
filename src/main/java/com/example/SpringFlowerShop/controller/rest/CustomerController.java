@@ -1,4 +1,4 @@
-package com.example.SpringFlowerShop.controller;
+package com.example.SpringFlowerShop.controller.rest;
 
 import com.example.SpringFlowerShop.dto.CustomerDto;
 import com.example.SpringFlowerShop.dto.OrderDto;
@@ -14,6 +14,7 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class CustomerController {
     private final CustomerService customerService;
+
     @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
@@ -49,9 +50,9 @@ public class CustomerController {
     @PutMapping("/customers/{id}")
     public ResponseEntity<CustomerDto> updateCustomerById(@PathVariable Long id,
                                                           @RequestBody CustomerDto customerDto) {
-       return customerService.updateCustomerById(id, customerDto)
-               .map(ResponseEntity::ok)
-               .orElse(ResponseEntity.notFound().build());
+        return customerService.updateCustomerById(id, customerDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/customers/{id}")

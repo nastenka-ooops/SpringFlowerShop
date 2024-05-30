@@ -21,22 +21,22 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public ProductDto createProduct(ProductDto productDto){
+    public ProductDto createProduct(ProductDto productDto) {
         return productMapper.mapToProductDto(
                 productRepository.save(productMapper.mapToProductEntity(productDto)));
     }
 
-    public List<ProductDto> getAllProducts(){
+    public List<ProductDto> getAllProducts() {
         return productRepository.findAll().stream().map(productMapper::mapToProductDto)
                 .collect(Collectors.toList());
     }
 
-    public ProductDto getProductById(Long id){
+    public ProductDto getProductById(Long id) {
         return productMapper.mapToProductDto(productRepository.findById(id)
                 .orElse(new Product()));
     }
 
-    public ProductDto updateProductById(Long id, ProductDto updatedProduct){
+    public ProductDto updateProductById(Long id, ProductDto updatedProduct) {
         ProductDto productDto = productMapper.mapToProductDto(
                 productRepository.findById(id).orElse(new Product()));
         productDto.setName(updatedProduct.getName());
@@ -46,7 +46,7 @@ public class ProductService {
                 productRepository.save(productMapper.mapToProductEntity(productDto)));
     }
 
-    public void deleteProductById(Long id){
+    public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
 }

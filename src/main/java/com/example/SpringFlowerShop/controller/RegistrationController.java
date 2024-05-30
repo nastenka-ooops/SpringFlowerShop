@@ -1,8 +1,7 @@
 package com.example.SpringFlowerShop.controller;
 
-import com.example.SpringFlowerShop.config.UserService;
 import com.example.SpringFlowerShop.dto.UserDto;
-import com.example.SpringFlowerShop.entity.User;
+import com.example.SpringFlowerShop.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,20 +22,21 @@ public class RegistrationController {
         model.addAttribute("user", new UserDto());
         return "register";
     }
+
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userForm") @Valid UserDto userForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        /*if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+        if (!userForm.getPassword().equals(userForm.getConfirmPassword())) {
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
-        }*/
-        if (!userService.createUser(userForm)){
+        }
+        if (!userService.saveUser(userForm)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "register";
         }
 
-        return "redirect:/home";
+        return "redirect:/login";
     }
 }

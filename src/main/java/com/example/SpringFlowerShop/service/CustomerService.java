@@ -3,7 +3,6 @@ package com.example.SpringFlowerShop.service;
 import com.example.SpringFlowerShop.dto.CustomerDto;
 import com.example.SpringFlowerShop.dto.OrderDto;
 import com.example.SpringFlowerShop.entity.Customer;
-import com.example.SpringFlowerShop.entity.Order;
 import com.example.SpringFlowerShop.mapping.CustomerMapper;
 import com.example.SpringFlowerShop.mapping.OrderMapper;
 import com.example.SpringFlowerShop.repository.CustomerRepository;
@@ -21,6 +20,7 @@ public class CustomerService {
     private final OrderRepository orderRepository;
     private final CustomerMapper customerMapper = new CustomerMapper();
     private final OrderMapper orderMapper = new OrderMapper();
+
     @Autowired
     public CustomerService(CustomerRepository customerRepository, OrderRepository orderRepository) {
         this.customerRepository = customerRepository;
@@ -54,7 +54,7 @@ public class CustomerService {
     }
 
     public boolean deleteCustomerById(Long id) {
-        if (customerRepository.existsById(id)){
+        if (customerRepository.existsById(id)) {
             customerRepository.deleteById(id);
             return true;
         } else {

@@ -7,7 +7,7 @@ import java.sql.Date;
 public class OrderWithCustomerInfoDto {
     private Long id;
     private Date date;
-    private int customerId;
+    private Long customerId;
     private Status status;
     private String firstName;
     private String lastName;
@@ -31,11 +31,11 @@ public class OrderWithCustomerInfoDto {
         this.date = date;
     }
 
-    public int getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

@@ -1,6 +1,7 @@
 package com.example.SpringFlowerShop.entity;
 
 import jakarta.persistence.*;
+
 import java.util.Objects;
 
 @Entity
@@ -15,7 +16,18 @@ public class Product {
     private double price;
     @Column(nullable = false)
     private int height;
-    @OneToOne(mappedBy="product",targetEntity=Inventory.class, cascade = CascadeType.ALL)
+
+    private Boolean deleted;
+
+    public Boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    @OneToOne(mappedBy = "product", targetEntity = Inventory.class, cascade = CascadeType.ALL)
     private Inventory inventory;
 
     public Product() {

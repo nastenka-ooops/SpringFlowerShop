@@ -11,7 +11,8 @@ public class InventoryMapper {
         dto.setShipmentDate(inventory.getShipmentDate());
         return dto;
     }
-    public Inventory mapToInventoryEntity (InventoryDto dto) {
+
+    public Inventory mapToInventoryEntity(InventoryDto dto) {
         Inventory inventory = new Inventory();
         //inventory.setProduct(dto.getProductId());
         inventory.setQuantity(dto.getQuantity());

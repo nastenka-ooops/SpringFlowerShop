@@ -1,10 +1,9 @@
 package com.example.SpringFlowerShop.entity;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
-
 
 import java.sql.Date;
+
 @Entity
 @Table(name = "inventory")
 public class Inventory {

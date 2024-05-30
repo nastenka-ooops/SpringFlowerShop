@@ -1,4 +1,4 @@
-package com.example.SpringFlowerShop.controller;
+package com.example.SpringFlowerShop.controller.rest;
 
 import com.example.SpringFlowerShop.dto.ProductDto;
 import com.example.SpringFlowerShop.service.ProductService;
@@ -20,30 +20,31 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
         ProductDto newProductDto = productService.createProduct(productDto);
         return ResponseEntity.ok(newProductDto);
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<ProductDto>> getAllProducts(){
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
         ProductDto productDto = productService.getProductById(id);
         return ResponseEntity.ok(productDto);
     }
+
     @PutMapping("/products/{id}")
     private ResponseEntity<ProductDto> updateProductById(@PathVariable Long id,
-                                                     @RequestBody ProductDto productDto){
+                                                         @RequestBody ProductDto productDto) {
         ProductDto updatedProduct = productService.updateProductById(id, productDto);
         return ResponseEntity.ok(updatedProduct);
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<String> deleteProductById(@PathVariable Long id){
+    public ResponseEntity<String> deleteProductById(@PathVariable Long id) {
         productService.deleteProductById(id);
         return ResponseEntity.ok("Product deleted successfully");
     }

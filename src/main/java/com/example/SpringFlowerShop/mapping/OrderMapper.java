@@ -1,8 +1,6 @@
 package com.example.SpringFlowerShop.mapping;
 
-import com.example.SpringFlowerShop.dto.CustomerDto;
 import com.example.SpringFlowerShop.dto.OrderDto;
-import com.example.SpringFlowerShop.entity.Customer;
 import com.example.SpringFlowerShop.entity.Order;
 
 public class OrderMapper {
@@ -10,16 +8,13 @@ public class OrderMapper {
         OrderDto dto = new OrderDto();
         dto.setId(order.getId());
         dto.setDate(order.getDate());
-        dto.setCustomerId(order.getCustomerId());
+        dto.setCustomerId(order.getCustomer().getId());
         dto.setStatus(order.getStatus());
+
+        dto.setItems(order.getOrderItems().stream().map
+                (OrderItemMapper::mapToOrderItemDto).toList());
+
         return dto;
     }
-    public Order mapToOrderEntity (OrderDto dto) {
-        Order order = new Order();
-        order.setId(dto.getId());
-        order.setDate(dto.getDate());
-        order.setCustomerId(dto.getCustomerId());
-        order.setStatus(dto.getStatus());
-        return order;
-    }
+
 }

@@ -1,9 +1,7 @@
 package com.example.SpringFlowerShop.mapping;
 
 import com.example.SpringFlowerShop.dto.CustomerDto;
-import com.example.SpringFlowerShop.dto.InventoryDto;
 import com.example.SpringFlowerShop.entity.Customer;
-import com.example.SpringFlowerShop.entity.Inventory;
 
 public class CustomerMapper {
     public CustomerDto mapToCustomerDto(Customer customer) {
@@ -16,7 +14,8 @@ public class CustomerMapper {
         dto.setPhone(customer.getPhone());
         return dto;
     }
-    public Customer mapToCustomerEntity (CustomerDto dto) {
+
+    public Customer mapToCustomerEntity(CustomerDto dto) {
         Customer customer = new Customer();
         customer.setId(dto.getId());
         customer.setFirstName(dto.getFirstName());

@@ -1,10 +1,5 @@
 package com.example.SpringFlowerShop.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 public class CustomerDto {
     private Long id;
     private String firstName;

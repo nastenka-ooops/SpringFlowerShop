@@ -1,15 +1,25 @@
 package com.example.SpringFlowerShop.dto;
 
 import com.example.SpringFlowerShop.entity.Status;
-import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 public class OrderDto {
     private Long id;
     private Date date;
-    private int customerId;
+    private Long customerId;
     private Status status;
+
+    private List<OrderItemDto> items;
+
+    public List<OrderItemDto> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItemDto> items) {
+        this.items = items;
+    }
 
     public Long getId() {
         return id;
@@ -27,11 +37,11 @@ public class OrderDto {
         this.date = date;
     }
 
-    public int getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

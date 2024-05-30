@@ -21,16 +21,17 @@ public class InventoryService {
     private final InventoryRepository inventoryRepository;
     private final InventoryMapper inventoryMapper = new InventoryMapper();
     private final InventoryWithProductInfoMapper inventoryWithProductInfoMapper = new InventoryWithProductInfoMapper();
+
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public Optional<InventoryDto> getInventoryByProductId(Long productId){
+    public Optional<InventoryDto> getInventoryByProductId(Long productId) {
         return inventoryRepository.findById(productId).map(inventoryMapper::mapToInventoryDto);
     }
 
-    public InventoryWithProductInfoDto getInventoryByProductIdWithProductInfo(Long productId){
+    public InventoryWithProductInfoDto getInventoryByProductIdWithProductInfo(Long productId) {
         Inventory inventory = inventoryRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Inventory with product id " + productId + " not found"));
         Product product = inventory.getProduct();
@@ -38,12 +39,12 @@ public class InventoryService {
                 .mapToInventoryWithProductInfoDto(inventory, product);
     }
 
-    public List<InventoryDto> getAllInventories(){
+    public List<InventoryDto> getAllInventories() {
         return inventoryRepository.findAll().stream().map(inventoryMapper::mapToInventoryDto)
                 .collect(Collectors.toList());
     }
 
-    public InventoryDto createInventory (InventoryDto inventoryDto){
+    public InventoryDto createInventory(InventoryDto inventoryDto) {
         Long productId = inventoryDto.getProductId();
 
         Product product = productRepository.findById(productId)
@@ -57,7 +58,7 @@ public class InventoryService {
         return inventoryMapper.mapToInventoryDto(newInventory);
     }
 
-    public Optional<InventoryDto> updateInventoryByProductId(Long productId, InventoryDto inventoryDto){
+    public Optional<InventoryDto> updateInventoryByProductId(Long productId, InventoryDto inventoryDto) {
         return inventoryRepository.findById(productId).map(inventory -> {
             inventory.setQuantity(inventoryDto.getQuantity());
             inventory.setShipmentDate(inventoryDto.getShipmentDate());
@@ -66,8 +67,8 @@ public class InventoryService {
         });
     }
 
-    public boolean deleteInventoryByProductId(Long productId){
-        if (inventoryRepository.existsById(productId)){
+    public boolean deleteInventoryByProductId(Long productId) {
+        if (inventoryRepository.existsById(productId)) {
             inventoryRepository.deleteById(productId);
             return true;
         } else {

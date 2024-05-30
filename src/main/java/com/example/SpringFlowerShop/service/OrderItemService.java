@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
     private final OrderItemMapper orderItemMapper = new OrderItemMapper();
+
     @Autowired
     public OrderItemService(OrderItemRepository orderItemRepository) {
         this.orderItemRepository = orderItemRepository;
@@ -23,36 +24,37 @@ public class OrderItemService {
     public List<OrderItemDto> getAllOrderItems() {
         List<OrderItem> orderItems = orderItemRepository.findAll();
         return orderItems.stream()
-                .map(orderItemMapper::mapToOrderItemDto)
+                .map(OrderItemMapper::mapToOrderItemDto)
                 .collect(Collectors.toList());
     }
 
     public List<OrderItemDto> getAllOrderItemsByOrderId(Long orderId) {
         List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
         return orderItems.stream()
-                .map(orderItemMapper::mapToOrderItemDto)
+                .map(OrderItemMapper::mapToOrderItemDto)
                 .collect(Collectors.toList());
     }
 
     public List<OrderItemDto> getAllOrderItemsByProductId(int productId) {
         List<OrderItem> orderItems = orderItemRepository.findByProductId(productId);
         return orderItems.stream()
-                .map(orderItemMapper::mapToOrderItemDto)
+                .map(OrderItemMapper::mapToOrderItemDto)
                 .collect(Collectors.toList());
     }
 
     public Optional<OrderItemDto> getOrderItemByOrderIdAndProductId(int orderId, int productId) {
         return orderItemRepository.findByOrderIdAndProductId(orderId, productId)
-                .map(orderItemMapper::mapToOrderItemDto);
+                .map(OrderItemMapper::mapToOrderItemDto);
     }
 
     public OrderItemDto createOrderItem(OrderItemDto orderItemDto) {
+
         OrderItem orderItem = orderItemMapper.mapToOrderItemEntity(orderItemDto);
         OrderItem savedOrderItem = orderItemRepository.save(orderItem);
         return orderItemMapper.mapToOrderItemDto(savedOrderItem);
     }
 
-    public Optional<OrderItemDto> updateOrderItemByOrderIdAndProductId(int orderId, int productId, OrderItemDto orderItemDto){
+    public Optional<OrderItemDto> updateOrderItemByOrderIdAndProductId(int orderId, int productId, OrderItemDto orderItemDto) {
         return orderItemRepository.findByOrderIdAndProductId(orderId, productId).map(orderItem -> {
             orderItem.setQuantity(orderItemDto.getQuantity());
             OrderItem updatedOrderItem = orderItemRepository.save(orderItem);
@@ -61,7 +63,7 @@ public class OrderItemService {
     }
 
     public boolean deleteOrderItemByOrderIdAndProductId(int orderId, int productId) {
-        if (orderItemRepository.existsByOrderIdAndProductId(orderId, productId)){
+        if (orderItemRepository.existsByOrderIdAndProductId(orderId, productId)) {
             orderItemRepository.deleteByOrderIdAndProductId(orderId, productId);
             return true;
         } else {

@@ -5,7 +5,7 @@ import com.example.SpringFlowerShop.entity.Inventory;
 import com.example.SpringFlowerShop.entity.Product;
 
 public class InventoryWithProductInfoMapper {
-    public InventoryWithProductInfoDto mapToInventoryWithProductInfoDto (Inventory inventory, Product product) {
+    public InventoryWithProductInfoDto mapToInventoryWithProductInfoDto(Inventory inventory, Product product) {
         InventoryWithProductInfoDto dto = new InventoryWithProductInfoDto();
         dto.setProductId(inventory.getProduct().getId());
         dto.setQuantity(inventory.getQuantity());

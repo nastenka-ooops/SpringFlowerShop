@@ -13,16 +13,14 @@ public class Order {
     private Long id;
     @Column(nullable = false)
     private Date date;
-    @Column(name = "customer_id", nullable = false)
-    private int customerId;
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private Status status;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "orderId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItem> orderItems;
 
     public List<OrderItem> getOrderItems() {
@@ -47,14 +45,6 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public Status getStatus() {

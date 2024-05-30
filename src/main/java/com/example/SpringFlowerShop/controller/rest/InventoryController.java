@@ -1,4 +1,4 @@
-package com.example.SpringFlowerShop.controller;
+package com.example.SpringFlowerShop.controller.rest;
 
 import com.example.SpringFlowerShop.dto.InventoryDto;
 import com.example.SpringFlowerShop.dto.InventoryWithProductInfoDto;
@@ -13,23 +13,24 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class InventoryController {
     private final InventoryService inventoryService;
+
     @Autowired
     public InventoryController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
     @PostMapping("/inventories")
-    public ResponseEntity<InventoryDto> createInventory(@RequestBody InventoryDto inventoryDto){
+    public ResponseEntity<InventoryDto> createInventory(@RequestBody InventoryDto inventoryDto) {
         return ResponseEntity.ok(inventoryService.createInventory(inventoryDto));
     }
 
     @GetMapping("/inventories")
-    public ResponseEntity<List<InventoryDto>> getAllInventories(){
+    public ResponseEntity<List<InventoryDto>> getAllInventories() {
         return ResponseEntity.ok(inventoryService.getAllInventories());
     }
 
     @GetMapping("/inventories/{productId}")
-    public ResponseEntity<InventoryDto> getInventoryByProductId(@PathVariable Long productId){
+    public ResponseEntity<InventoryDto> getInventoryByProductId(@PathVariable Long productId) {
         return inventoryService.getInventoryByProductId(productId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -37,20 +38,20 @@ public class InventoryController {
 
     @GetMapping("/inventories/{productId}/productInfo")
     public ResponseEntity<InventoryWithProductInfoDto> getInventoryWithProductInfoByProductId
-            (@PathVariable Long productId){
+            (@PathVariable Long productId) {
         return ResponseEntity.ok(inventoryService.getInventoryByProductIdWithProductInfo(productId));
     }
 
     @PutMapping("/inventories/{productId}")
     public ResponseEntity<InventoryDto> updateInventoryByProductId(@PathVariable Long productId,
-                                                                   @RequestBody InventoryDto inventoryDto){
+                                                                   @RequestBody InventoryDto inventoryDto) {
         return inventoryService.updateInventoryByProductId(productId, inventoryDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/inventories/{id}")
-    public ResponseEntity<Void> deleteInventoryByProductId(@PathVariable Long productId){
+    public ResponseEntity<Void> deleteInventoryByProductId(@PathVariable Long productId) {
         if (inventoryService.deleteInventoryByProductId(productId))
             return ResponseEntity.noContent().build();
         else
