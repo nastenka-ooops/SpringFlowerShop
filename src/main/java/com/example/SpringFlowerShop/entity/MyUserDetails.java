@@ -1,4 +1,4 @@
-package com.example.SpringFlowerShop.config;
+package com.example.SpringFlowerShop.entity;
 
 import com.example.SpringFlowerShop.entity.User;
 import org.springframework.security.core.GrantedAuthority;

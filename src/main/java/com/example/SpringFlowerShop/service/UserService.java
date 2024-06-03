@@ -1,6 +1,6 @@
 package com.example.SpringFlowerShop.service;
 
-import com.example.SpringFlowerShop.config.MyUserDetails;
+import com.example.SpringFlowerShop.entity.MyUserDetails;
 import com.example.SpringFlowerShop.dto.UserDto;
 import com.example.SpringFlowerShop.entity.Customer;
 import com.example.SpringFlowerShop.entity.Role;
