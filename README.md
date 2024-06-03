@@ -8,6 +8,9 @@ An online flower shop store application. It is a sample online store that allows
 - [order endpoints](https://github.com/nastenka-ooops/SpringFlowerShop/blob/main/documentation/endpointsOrder.txt)
 - [orderItem endpoints](https://github.com/nastenka-ooops/SpringFlowerShop/blob/main/documentation/endpointsOrderItem.txt)
 
+## Tests
+- [how to run tests](https://github.com/nastenka-ooops/SpringFlowerShop/blob/main/howToRunTests)
+
 ## Built With
 
 [Spring Boot](https://spring.io/projects/spring-boot/) - Server framewor
