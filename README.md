@@ -11,6 +11,11 @@ An online flower shop store application. It is a sample online store that allows
 ## Tests
 - [how to run tests](https://github.com/nastenka-ooops/SpringFlowerShop/blob/main/howToRunTests)
 
+## Docker
+If you are using Docker, open Terminal, type command and run: 
+
+_docker run --network spring-flower-shop-net --name spring-flower-shop-container -e DB_URL=your-database-url(omit 'jdbc:' part of URL) -e USERNAME=your-database-username -e PASSWORD=your-database-password -p {your-port-to-run-app}:8080 spring-flower-shop_
+
 ## Built With
 
 [Spring Boot](https://spring.io/projects/spring-boot/) - Server framewor
