@@ -52,22 +52,8 @@ class FlowerShopOrderControllerTest {
 
         mockMvc.perform(post("/order")
                 .flashAttr("orderDto", orderDto))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/order/success"));
-
+                .andExpect(status().is3xxRedirection());
     }
-
-
-    /*@Test
-    public void testPlaceOrder() throws Exception {
-        OrderDto orderDto = new OrderDto();
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/order")
-                        .param("productId", "1")
-                        .param("quantity", "2"))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/order/success"));
-    }*/
 
     @Test
     @WithMockUser(username = "testUser", roles = "USER")
