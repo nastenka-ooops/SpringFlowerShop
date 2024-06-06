@@ -1,0 +1,22 @@
+services:
+  app:
+    image: 'spring-slower-shop:latest'
+    build:
+      context: .
+    container_name: spring-flower-shop-compose-container
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/flower_shop
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=n3a0s1t2ia
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: 'mysql'
+    container_name: 'mysql-compose-container'
+    environment:
+      MYSQL_DATABASE: flower_shop
+      MYSQL_USER: root
+      MYSQL_PASSWORD: n3a0s1t2ia
+      MYSQL_ROOT_PASSWORD: n3a0s1t2ia
