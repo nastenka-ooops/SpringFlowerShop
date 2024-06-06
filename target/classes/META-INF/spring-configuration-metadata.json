@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "rsa",
+      "type": "com.example.SpringFlowerShop.config.RsaKeyProperties",
+      "sourceType": "com.example.SpringFlowerShop.config.RsaKeyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rsa.private-key",
+      "type": "java.security.interfaces.RSAPrivateKey",
+      "sourceType": "com.example.SpringFlowerShop.config.RsaKeyProperties"
+    },
+    {
+      "name": "rsa.public-key",
+      "type": "java.security.interfaces.RSAPublicKey",
+      "sourceType": "com.example.SpringFlowerShop.config.RsaKeyProperties"
+    }
+  ],
+  "hints": []
+}

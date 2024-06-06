@@ -1,0 +1,10 @@
+com\example\SpringFlowerShop\controller\HomeControllerTest.class
+com\example\SpringFlowerShop\controller\rest\CustomerControllerTest.class
+com\example\SpringFlowerShop\SpringFlowerShopApplicationTests.class
+com\example\SpringFlowerShop\config\TestDataSourceConfiguration.class
+com\example\SpringFlowerShop\controller\rest\OrderItemControllerTest.class
+com\example\SpringFlowerShop\controller\RegistrationControllerTest.class
+com\example\SpringFlowerShop\controller\rest\InventoryControllerTest.class
+com\example\SpringFlowerShop\controller\rest\ProductControllerTest.class
+com\example\SpringFlowerShop\controller\rest\OrderControllerTest.class
+com\example\SpringFlowerShop\controller\FlowerShopOrderControllerTest.class
