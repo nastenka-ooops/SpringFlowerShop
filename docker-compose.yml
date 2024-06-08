@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   app:
-    image: 'spring-slower-shop:latest'
+    image: 'spring-flower-shop:latest'
     build:
       context: .
     container_name: spring-flower-shop-compose-container
@@ -11,12 +13,19 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=n3a0s1t2ia
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
 
   db:
     image: 'mysql'
     container_name: 'mysql-compose-container'
     environment:
       MYSQL_DATABASE: flower_shop
-      MYSQL_USER: root
-      MYSQL_PASSWORD: n3a0s1t2ia
       MYSQL_ROOT_PASSWORD: n3a0s1t2ia
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
