@@ -16,9 +16,14 @@ If you are using Docker, open Terminal, type command and run:
 
 _docker run --network spring-flower-shop-net --name spring-flower-shop-container -e DB_URL=your-database-url(omit 'jdbc:' part of URL) -e USERNAME=your-database-username -e PASSWORD=your-database-password -p {your-port-to-run-app}:8080 spring-flower-shop_
 
+## Deploy
+https://spring-flower-shop-production.up.railway.app/welcome
+
 ## Built With
 
-[Spring Boot](https://spring.io/projects/spring-boot/) - Server framewor
+[Spring Boot](https://spring.io/projects/spring-boot/) - Server framework
+
+[Spring Security](https://spring.io/projects/spring-security) - Security
 
 [Maven](https://maven.apache.org) - Build and dependency management
 
