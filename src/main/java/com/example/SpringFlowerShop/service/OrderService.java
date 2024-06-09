@@ -1,16 +1,15 @@
 package com.example.SpringFlowerShop.service;
 
+import com.example.SpringFlowerShop.dto.InventoryDto;
 import com.example.SpringFlowerShop.dto.OrderDto;
 import com.example.SpringFlowerShop.dto.OrderItemDto;
 import com.example.SpringFlowerShop.dto.OrderWithCustomerInfoDto;
 import com.example.SpringFlowerShop.entity.*;
+import com.example.SpringFlowerShop.mapping.InventoryMapper;
 import com.example.SpringFlowerShop.mapping.OrderItemMapper;
 import com.example.SpringFlowerShop.mapping.OrderMapper;
 import com.example.SpringFlowerShop.mapping.OrderWithCustomerInfoMapper;
-import com.example.SpringFlowerShop.repository.CustomerRepository;
-import com.example.SpringFlowerShop.repository.OrderItemRepository;
-import com.example.SpringFlowerShop.repository.OrderRepository;
-import com.example.SpringFlowerShop.repository.ProductRepository;
+import com.example.SpringFlowerShop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,15 +27,20 @@ public class OrderService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final OrderMapper orderMapper = new OrderMapper();
+    private final InventoryService inventoryService;
+    private final InventoryRepository inventoryRepository;
+    private final InventoryMapper inventoryMapper = new InventoryMapper();
     private final OrderItemMapper orderItemMapper = new OrderItemMapper();
     private final OrderWithCustomerInfoMapper orderWithCustomerInfoMapper = new OrderWithCustomerInfoMapper();
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
+    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository, CustomerRepository customerRepository, ProductRepository productRepository, InventoryService inventoryService, InventoryRepository orderInventoryRepository, InventoryRepository inventoryRepository) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
+        this.inventoryService = inventoryService;
+        this.inventoryRepository = inventoryRepository;
     }
 
     public List<OrderDto> getAllOrders() {
@@ -68,7 +72,6 @@ public class OrderService {
 
         Optional<Customer> customer = customerRepository.findByEmail(customerName);
 
-        //TODO create order using constructor
         if (customer.isPresent()) {
             order.setCustomer(customer.get());
             order.setDate(Date.valueOf(LocalDate.now()));
@@ -89,6 +92,12 @@ public class OrderService {
                     orderItem.setQuantity(item.getQuantity());
                     orderItems.add(orderItem);
                     orderItemRepository.save(orderItem);
+
+                    Optional<Inventory> inventory = inventoryRepository.findByProductId(product.get().getId());
+                    if (inventory.isPresent()) {
+                        inventory.get().setQuantity(inventory.get().getQuantity()-orderItem.getQuantity());
+                        inventoryService.updateInventoryByProductId(inventory.get().getId(), inventoryMapper.mapToInventoryDto(inventory.get()));
+                    }
                 }
             }
         }

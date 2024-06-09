@@ -24,6 +24,8 @@ public class Customer {
             fetch = FetchType.LAZY)
     private Collection<Order> orders;
 
+
+
     public Long getId() {
         return id;
     }

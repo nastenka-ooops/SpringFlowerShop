@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,13 +28,12 @@ public class ProductService {
     }
 
     public List<ProductDto> getAllProducts() {
-        return productRepository.findAll().stream().map(productMapper::mapToProductDto)
+        return productRepository.findByDeletedFalse().stream().map(productMapper::mapToProductDto)
                 .collect(Collectors.toList());
     }
 
-    public ProductDto getProductById(Long id) {
-        return productMapper.mapToProductDto(productRepository.findById(id)
-                .orElse(new Product()));
+    public Optional<ProductDto> getProductById(Long id) {
+        return productRepository.findById(id).map(productMapper::mapToProductDto);
     }
 
     public ProductDto updateProductById(Long id, ProductDto updatedProduct) {
@@ -47,6 +47,8 @@ public class ProductService {
     }
 
     public void deleteProductById(Long id) {
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        product.setDeleted(true);
+        productRepository.save(product);
     }
 }

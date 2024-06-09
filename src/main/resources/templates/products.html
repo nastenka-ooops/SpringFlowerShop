@@ -27,6 +27,9 @@
             <form th:action="@{/admin/products/edit/{id}(id=${product.id})}" method="get">
                 <button type="submit">Edit</button>
             </form>
+            <form th:action="@{/admin/products/delete/{id}(id=${product.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
         </td>
     </tr>
     </tbody>

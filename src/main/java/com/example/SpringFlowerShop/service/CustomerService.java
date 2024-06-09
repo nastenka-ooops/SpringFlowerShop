@@ -36,6 +36,10 @@ public class CustomerService {
         return customerRepository.findById(id).map(customerMapper::mapToCustomerDto);
     }
 
+    public Optional<CustomerDto> getCustomerByUsername(String username) {
+        return customerRepository.findByEmail(username).map(customerMapper::mapToCustomerDto);
+    }
+
     public CustomerDto createCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.mapToCustomerEntity(customerDto);
         Customer savedCustomer = customerRepository.save(customer);

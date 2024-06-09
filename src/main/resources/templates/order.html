@@ -25,8 +25,10 @@
             <td th:text="${product.price}"></td>
             <td th:text="${product.height}"></td>
             <td>
-                <input type="hidden" th:name="'items[' + ${product.id} + '].productId'" th:value="${product.id}">
-                <input type="number" th:name="'items[' + ${product.id} + '].quantity'" min="0" value="0">
+                <input type="hidden" th:name="'items[' + ${product.getId()} + '].productId'" th:value="${product.getId()}">
+                <label>
+                    <input type="number" th:name="'items[' + ${product.id} + '].quantity'" min="0" th:max="${product.getInventory.getQuantity}" value="0">
+                </label>
             </td>
         </tr>
         </tbody>

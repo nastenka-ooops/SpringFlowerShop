@@ -10,6 +10,7 @@ public class ProductMapper {
         productDto.setName(entity.getName());
         productDto.setPrice(entity.getPrice());
         productDto.setHeight(entity.getHeight());
+        productDto.setInventory(entity.getInventory());
         return productDto;
     }
 
@@ -19,6 +20,7 @@ public class ProductMapper {
         entity.setName(productDto.getName());
         entity.setPrice(productDto.getPrice());
         entity.setHeight(productDto.getHeight());
+        entity.setInventory(productDto.getInventory());
         return entity;
     }
 }

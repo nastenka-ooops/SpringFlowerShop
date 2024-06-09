@@ -1,10 +1,21 @@
 package com.example.SpringFlowerShop.dto;
 
+import com.example.SpringFlowerShop.entity.Product;
+
 public class OrderItemDto {
     private Long id;
     private Long orderId;
     private Long productId;
     private int quantity;
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Long getOrderId() {
         return orderId;

@@ -30,6 +30,11 @@ public class Order {
     public Order() {
     }
 
+    public Order(Date date, Status status, Customer customer) {
+        this.date = date;
+        this.status = status;
+        this.customer = customer;
+    }
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;

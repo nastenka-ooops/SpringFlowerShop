@@ -1,10 +1,21 @@
 package com.example.SpringFlowerShop.dto;
 
+import com.example.SpringFlowerShop.entity.Inventory;
+
 public class ProductDto {
     Long id;
     String name;
     double price;
     int height;
+    Inventory inventory;
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     public ProductDto() {
     }

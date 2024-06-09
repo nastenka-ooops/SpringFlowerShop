@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,8 +50,8 @@ public class AdminController {
 
     @GetMapping("/products/edit/{id}")
     public String showEditProductForm(@PathVariable Long id, Model model) {
-        ProductDto product = productService.getProductById(id);
-        model.addAttribute("product", product);
+        Optional<ProductDto> product = productService.getProductById(id);
+        product.ifPresent(productDto -> model.addAttribute("product", productDto));
         return "edit-product";
     }
 
@@ -83,3 +84,4 @@ public class AdminController {
         return "redirect:/admin/products";
     }
 }
+

@@ -8,6 +8,31 @@
 <body>
 <h1>Order Placed Successfully</h1>
 <p>Your order has been placed. Thank you for shopping with us!</p>
+
+<h2>Order Details</h2>
+<p><strong>Order ID:</strong> <span th:text="${order.getId}"></span></p>
+<p><strong>Customer Name:</strong> <span th:text="${customer.getFirstName}"></span></p>
+<p><strong>Total Price:</strong> <span th:text="${totalPrice}"></span></p>
+
+<h3>Order Items</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${order.getItems}">
+        <td th:text="${item.getProduct.getName}"></td>
+        <td th:text="${item.getQuantity}"></td>
+        <td th:text="${item.getProduct.getPrice}"></td>
+    </tr>
+    </tbody>
+</table>
+
 <a th:href="@{/order}">Place another order</a>
+<a th:href="@{/home}">Главная</a>
 </body>
 </html>

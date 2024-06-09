@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="English">
 <head>
     <title>Home</title>
 </head>
 <body>
 <h1 th:text="${message}">Home Page</h1>
-<a href="/order">Make order</a><br/>
-<a href="/welcome">Logout</a>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <p>
+        <a th:href="@{/admin}">Admin Panel</a>
+    </p>
+</div>
+<div sec:authorize="hasAuthority('CUSTOMER')">
+    <p>
+        <a th:href="@{/order}">Make order</a>
+    </p>
+</div>
+<a th:href="@{/welcome}">Logout</a>
 </body>
 </html>
